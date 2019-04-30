@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:page_title) || t("site_name") %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar__container">
+        <div class="navbar__left">
+          <%= link_to(root_path) do %>
+            <%= image_tag "logo.svg", width: 34 %>
+          <% end %>
+        </div>
+        <div class="navbar__right">
+          <% if current_user %>
+            <%= link_to(t("logout.text"), logout_path, data: { method: :delete }, class: "form__button form__button--danger") %>
+          <% else %>
+            <%= link_to(t("login.text"), login_path, class: "form__button form__button--primary") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <div class="notification notification__<%= name %>">
+          <%= msg %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>
