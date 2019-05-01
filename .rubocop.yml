@@ -1,0 +1,18 @@
+# require: rubocop-rspec
+# inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'bin/**/*'
+    - vendor/**/*
+
+Documentation:
+  Enabled: false
+
+Rails:
+  Enabled: true
