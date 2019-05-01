@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  # === ASSOCIATIONS ===
-  belongs_to :author, class_name: "User"
-  has_many :comments, dependent: :destroy
+	acts_as_taggable
 
-  # === VALIDATIONS ===
-  validates :title, :body, :author_id, presence: true
+	# === ASSOCIATIONS ===
+	belongs_to :author, class_name: "User"
+	has_many :comments, dependent: :destroy
 
-  # === SCOPES ===
-  scope :ordered, -> { order(updated_at: :desc) }
+	# === VALIDATIONS ===
+	validates :title, :body, :author_id, presence: true
+
+	# === SCOPES ===
+	scope :ordered, -> { order(updated_at: :desc) }
 end
