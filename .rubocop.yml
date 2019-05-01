@@ -16,3 +16,15 @@ Documentation:
 
 Rails:
   Enabled: true
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/Tab:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
