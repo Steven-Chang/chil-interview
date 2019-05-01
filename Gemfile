@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -27,6 +29,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'guard-rspec', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', '~> 0.63.0', require: false
   gem 'spring'
