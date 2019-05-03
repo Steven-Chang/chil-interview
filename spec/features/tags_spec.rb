@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "tags", type: :feature do
+RSpec.describe "tags", type: :feature, js: true do
 	let!(:post) { create(:post) }
 	let(:tag_name) { "horses" }
 	let(:tag_name_two) { "on" }
@@ -72,15 +72,26 @@ RSpec.describe "tags", type: :feature do
 		end
 	end
 
-  it "allows author of post to add tags while creating post"
+	describe "adding tags while creating post" do
+		it "allows author of post to add tags while creating post" do
+			login_as(post.author)
+	    click_link "New Post"
+	    fill_in "post[title]", with: "RSpec"
+	    fill_in "post[body]", with: "RSpec"
+			find(".ui-widget-content .ui-autocomplete-input").set(tag_name)
+			click_button "Create Post"
+			expect(page)
+			  .to have_link(tag_name, href: tag_path(name: tag_name))
+		end
+	end
 
-  it "allows author of post to remove tags while creating post"
+	describe "changing tags while editing post" do
+	  it "allows author of post to add tags while editing post"
 
-  it "allows author of post to add tags while editing post"
+	  it "allows author of post to remove tags while editing post"
 
-  it "allows author of post to remove tags while editing post"
+	  it "doesn't allow adding of tag to someone else's post"
 
-  it "doesn't allow adding of tag to someone else's post"
-
-  it "doesn't allow removing of tag to someone else's post"
+	  it "doesn't allow removing of tag to someone else's post"
+	end
 end

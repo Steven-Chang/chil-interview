@@ -13,9 +13,9 @@
     <% end %>
   </h2>
   <% unless post.tag_list.empty? %>
-    <div class="post__tags mt-3 mb-3">
+    <div class="post__tags">
       <% post.tag_list.each_with_index do |tag_name, index| %>
-        <span class="<% 'ml-2' if index > 0 %>"><%= link_to tag_name, tag_path(name: tag_name) %></span>
+        <div class="tag-container"><%= link_to tag_name, tag_path(name: tag_name) %></div>
       <% end %>
     </div>
   <% end %>

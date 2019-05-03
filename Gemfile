@@ -30,6 +30,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "selenium-webdriver"
   gem "simplecov", require: false
+  gem "webdrivers", "~> 3.0"
 end
 
 group :development do
@@ -42,6 +43,7 @@ group :development do
 end
 
 group :test do
+  gem "capybara-selenium"
   gem "rails-controller-testing"
   gem "shoulda-matchers"
 end

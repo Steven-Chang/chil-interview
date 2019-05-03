@@ -1,24 +1,18 @@
-require "simplecov"
-
-SimpleCov.start "rails" do
-  minimum_coverage 90
-  minimum_coverage_by_file 50
-
-  add_filter "app/policies/application_policy.rb"
-  add_filter "app/mailers/application_mailer.rb"
-  add_filter "app/channels/application_cable/channel.rb"
-  add_filter "app/channels/application_cable/connection.rb"
-  add_filter "app/jobs/application_job.rb"
-end
+# frozen_string_literal: true
 
 # This file is copied to spec/ when you run "rails generate rspec:install"
 ENV["RAILS_ENV"] ||= "test"
-require File.expand_path("../../config/environment", __FILE__)
-# Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+require File.expand_path("../config/environment", __dir__)
 require "spec_helper"
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
+if Rails.env.production?
+  # Prevent database truncation if the environment is production
+  abort("The Rails environment is running in production mode!")
+end
+require "selenium/webdriver"
+require "simplecov"
+require "webdrivers"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -33,11 +27,27 @@ require "rspec/rails"
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w[headless disable-gpu] }
+  )
+
+  Capybara::Selenium::Driver.new app,
+                                 browser: :chrome,
+                                 desired_capabilities: capabilities
+end
+
+Capybara.javascript_driver = :headless_chrome
 
 RSpec.configure do |config|
   # Remove this line if you"re not using ActiveRecord or ActiveRecord fixtures
@@ -75,4 +85,15 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+SimpleCov.start "rails" do
+  minimum_coverage 90
+  minimum_coverage_by_file 50
+
+  add_filter "app/policies/application_policy.rb"
+  add_filter "app/mailers/application_mailer.rb"
+  add_filter "app/channels/application_cable/channel.rb"
+  add_filter "app/channels/application_cable/connection.rb"
+  add_filter "app/jobs/application_job.rb"
 end
