@@ -5,34 +5,72 @@ require "rails_helper"
 RSpec.describe "tags", type: :feature do
 	let!(:post) { create(:post) }
 	let(:tag_name) { "horses" }
-	let(:untagged_post) { create(:post) }
+	let(:tag_name_two) { "on" }
+	let(:post_two) { create(:post) }
 	before do
 		post.tag_list.add(tag_name)
 		post.save
 		post.reload
 	end
 
-  it "lists posts, on the tag's page with a border" do
-  	visit tag_path(name: tag_name)
+	describe "tags show page" do
+		before do
+			visit tag_path(name: tag_name)
+		end
 
-  	expect(page).to have_selector(".post--border")
-  end
+		describe "displaying posts" do
+		  it "lists posts, on the tag's page with a border" do
+		  	expect(page).to have_selector(".post--border")
+		  end
 
-  it "lists posts, on the tag's page with the title as a link" do
-  	visit tag_path(name: tag_name)
+		  it "lists posts, on the tag's page with the title as a link" do
+		  	expect(page).to have_link post.title, href: post_path(post)
+		  end
 
-  	expect(page).to have_link post.title, href: post_path(post)
-  end
+		  it "doesn't list unrelated posts on the tag's page" do
+		  	expect(page)
+		  	  .not_to have_link(post_two.title, href: post_path(post_two))
+		  end
+		end
 
-  it "doesn't list unrelated posts on the tag's page" do
-  	visit tag_path(name: tag_name)
+		describe "displaying tags on posts" do
+		  it "displays a posts tags as a link" do
+				expect(page).to have_link(tag_name, href: tag_path(name: tag_name))
+		  end
 
-  	expect(page).not_to have_link untagged_post.title, href: post_path(untagged_post)
-  end
+		  it "doesn't display unrelated tags for a post" do
+		  	post_two.tag_list.add(tag_name_two)
+		  	post_two.save
+		  	visit tag_path(name: tag_name_two)
+		  	expect(page).not_to have_link(tag_name, href: tag_path(name: tag_name))
+		  end
+		end
+	end
 
-  it "lists tags for each post on home page"
+	describe "home page" do
+	  it "displays a posts tags as a link" do
+	  	visit root_path
+			expect(page).to have_link(tag_name, href: tag_path(name: tag_name))
+	  end
+	end
 
-  it "lists tags for post on post page"
+	describe "post page" do
+	  it "displays a posts tags as a link" do
+	  	post.tag_list.add(tag_name_two)
+	  	post.save
+	  	visit post_path(post)
+			expect(page).to have_link(tag_name, href: tag_path(name: tag_name))
+			expect(page).to have_link(tag_name_two, href: tag_path(name: tag_name_two))
+	  end
+
+		it "doesn't list unrelated tags for post on post page" do
+			post_two.tag_list.add(tag_name_two)
+			post.save
+			visit post_path(post)
+			expect(page)
+			  .not_to have_link(tag_name_two, href: tag_path(name: tag_name_two))
+		end
+	end
 
   it "allows author of post to add tags while creating post"
 

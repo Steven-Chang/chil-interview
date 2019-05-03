@@ -56,6 +56,21 @@
     }
   }
 
+  &__tags {
+    a{
+      color: rgba(0, 0, 0, 0.482353);
+      text-decoration: none;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.682353);
+        transition-delay: 0s;
+        transition-duration: 0.2s;
+        transition-property: color;
+        transition-timing-function: ease;
+      }
+    }
+  }
+
   &__body {
     color: rgba(0, 0, 0, 0.843137);
     font-family: Georgia, Cambria, "Times New Roman", Times, serif;
