@@ -1,4 +1,6 @@
 <%= form_with(model: post, local: true) do |form| %>
+  <!-- This needs to be here for the update of tags list when removing all tags -->
+  <input type="hidden" value="" name="post[tag_list][]">
   <div class="form__field">
     <%= form.text_field :title, class: "form__control", required: true %>
     <span class="form__highlight"></span>
@@ -14,6 +16,9 @@
   <div class="form__field">
     <label id="tags-label">Tags</label>
     <ul id="tags">
+      <% post.tag_list.each do |tag_name| %>
+        <li><%= tag_name %></li>
+      <% end %>
     </ul>
   </div>  
   <div class="form__actions">

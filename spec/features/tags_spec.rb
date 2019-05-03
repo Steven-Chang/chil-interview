@@ -86,12 +86,24 @@ RSpec.describe "tags", type: :feature, js: true do
 	end
 
 	describe "changing tags while editing post" do
-	  it "allows author of post to add tags while editing post"
+		before do
+	    login_as(post.author)
 
-	  it "allows author of post to remove tags while editing post"
+	    visit post_path(post)
+	    click_link "Edit"
+		end
+	  it "allows author of post to add tags" do
+	  	find(".ui-widget-content .ui-autocomplete-input").set(tag_name_two)
+	  	click_button "Update Post"
+			expect(page)
+			  .to have_link(tag_name_two, href: tag_path(name: tag_name_two))
+	  end
 
-	  it "doesn't allow adding of tag to someone else's post"
-
-	  it "doesn't allow removing of tag to someone else's post"
+	  it "allows author of post to remove tags" do
+	  	find("a.tagit-close").click
+	  	sleep 1
+	  	click_button "Update Post"
+	  	expect(page).not_to have_link(tag_name, href: tag_path(name: tag_name))
+	  end
 	end
 end
