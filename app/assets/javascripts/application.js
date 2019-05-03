@@ -12,5 +12,6 @@
 //
 //= require jquery3
 //= require jquery-ui
+//= require tag-it
 //= require rails-ujs
 //= require_tree .
