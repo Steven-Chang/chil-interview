@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :post do
-    title { "RSpec Post Title" }
+    sequence(:title) { |n| "RSpec Post Title #{n}" }
     body { "This is an example post" }
     author
   end

@@ -1,2 +1,3 @@
 <h1>Tags#show</h1>
-<p>Find me in app/views/tags/show.html.erb</p>
+
+<%= render partial: "shared/post", collection: @posts, locals: { link_title: true, post_border: true } %>

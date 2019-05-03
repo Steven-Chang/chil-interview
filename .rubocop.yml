@@ -17,6 +17,9 @@ Documentation:
 Rails:
   Enabled: true
 
+Layout/IndentationConsistency:
+  Enabled: false
+
 Layout/IndentationWidth:
   Enabled: false
 

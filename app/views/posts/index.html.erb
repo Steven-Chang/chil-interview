@@ -2,5 +2,4 @@
   <%= link_to(t("new.text", resource: "Post"), new_post_path, class: "form__button form__button--primary") %>
 <% end %>
 
-
-<%= render @posts, link_title: true %>
+<%= render partial: "shared/post", collection: @posts, locals: { link_title: true, post_border: true } %>

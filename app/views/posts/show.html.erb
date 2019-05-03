@@ -7,4 +7,4 @@
   </div>
 <% end %>
 
-<%= render @post, expand_body: true %>
+<%= render partial: "shared/post", object: @post, locals: { expand_body: true } %>
