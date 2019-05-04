@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
@@ -16,6 +18,14 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    redirect_to(root_path, alert: t("unauthorized"))
+    respond_to do |format|
+      format.json do
+        render json: {
+          type: "error",
+          message: t("unauthorized")
+        }, status: :unauthorized
+      end
+      format.html { redirect_to(root_path, alert: t("unauthorized")) }
+    end
   end
 end

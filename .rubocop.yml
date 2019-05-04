@@ -32,6 +32,12 @@ Metrics/BlockLength:
     - 'app/**/concerns/**/*.rb'
     - 'config/routes.rb'
 
+Metrics/LineLength:
+  Max: 120
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
