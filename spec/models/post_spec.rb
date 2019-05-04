@@ -9,7 +9,6 @@ RSpec.describe Post, type: :model do
 	end
 
 	describe "VALIDATIONS" do
-		it { should validate_presence_of(:author_id) }
 		it { should validate_presence_of(:body) }
 		it { should validate_presence_of(:title) }
 	end

@@ -5,10 +5,10 @@ class Post < ApplicationRecord
 
 	# === ASSOCIATIONS ===
 	belongs_to :author, class_name: "User"
-	has_many :comments, dependent: :destroy
+	has_many :comments, as: :commentable, dependent: :destroy
 
 	# === VALIDATIONS ===
-	validates :title, :body, :author_id, presence: true
+	validates :title, :body, presence: true
 
 	# === SCOPES ===
 	scope :ordered, -> { order(updated_at: :desc) }
