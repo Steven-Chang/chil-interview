@@ -44,7 +44,6 @@ end
 
 group :test do
   gem "capybara-selenium"
-  gem "rails-controller-testing"
   gem "shoulda-matchers"
 end
 
