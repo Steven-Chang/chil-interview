@@ -11,6 +11,7 @@ gem "acts-as-taggable-on", "~> 6.0"
 gem "bcrypt"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "coffee-rails", "~> 4.2"
+gem 'fast_jsonapi'
 gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "puma", "~> 3.7"

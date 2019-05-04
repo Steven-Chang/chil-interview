@@ -87,6 +87,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.9.25)
     formatador (0.2.5)
     fuubar (2.3.2)
@@ -293,6 +295,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   database_cleaner
   factory_bot_rails
+  fast_jsonapi
   fuubar
   guard-rspec
   jquery-rails
