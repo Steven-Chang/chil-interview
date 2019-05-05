@@ -11,10 +11,4 @@ Rails.application.routes.draw do
   resources :comments, only: :create, defaults: { format: :js }
   resources :posts, except: :index
   resources :tags, param: :name, only: :show
-
-  namespace :api, defaults: { format: :json } do
-    namespace :v1 do
-    	resources :comments, only: :create
-    end
-  end
 end
