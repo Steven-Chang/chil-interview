@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "/login", to: "login#create"
   delete "/logout", to: "login#destroy"
 
+  resources :comments, only: :create, defaults: { format: :js }
   resources :posts, except: :index
   resources :tags, param: :name, only: :show
 
