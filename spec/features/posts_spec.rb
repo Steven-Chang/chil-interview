@@ -11,7 +11,6 @@ RSpec.describe "posts", type: :feature do
 
   it "login required to create post" do
     visit new_post_path
-
     expect(current_path).to eq(login_path)
     expect(page).to have_selector(".notification__alert", text: I18n.t("login_required"))
   end

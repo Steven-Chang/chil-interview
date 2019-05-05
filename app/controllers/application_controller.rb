@@ -14,18 +14,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def login_required
-    redirect_to(login_path, alert: t("login_required")) unless current_user
+    return if current_user
+
+    respond_to do |format|
+      format.html do
+        redirect_to(login_path, alert: t("login_required"))
+      end
+      format.js { render "shared/_login_required.js.erb", status: :unauthorized }
+    end
   end
 
   def user_not_authorized
     respond_to do |format|
-      format.json do
-        render json: {
-          type: "error",
-          message: t("unauthorized")
-        }, status: :unauthorized
-      end
       format.html { redirect_to(root_path, alert: t("unauthorized")) }
+      format.js { render "shared/_user_not_authorized.js.erb" }
     end
   end
 end
