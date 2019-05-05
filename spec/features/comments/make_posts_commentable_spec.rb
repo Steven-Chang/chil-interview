@@ -2,12 +2,12 @@
 
 require "rails_helper"
 
-RSpec.describe "comments", type: :feature, js: true do
+RSpec.describe "comment on post", type: :feature, js: true do
 	let!(:post) { create(:post) }
 
 	describe "post page" do
-		it "lets logged in user to comment on the pos via ajax"
+		it "lets logged in user to comment on the post via ajax"
 		it "doesn't let non logged in user to comment on post via ajax"
-		it "lets user to comment on another comment via ajax"
+		it "increases the comment count on the post after create"
 	end
 end

@@ -8,7 +8,7 @@ RSpec.describe "Comments", type: :request do
 
   describe "create" do
     context "when user isn't signed in" do
-      it "doesn't create a widget" do
+      it "doesn't create a post" do
         post "/api/v1/comments", params: {
           comment: {
             body: "Bucks 2019",
