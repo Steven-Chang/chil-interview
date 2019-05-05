@@ -8,3 +8,4 @@
 <% end %>
 
 <%= render partial: "shared/post", object: @post, locals: { expand_body: true } %>
+<%= render partial: "shared/comments", object: @post.comments, locals: { show_title: true, commentable: @post } %>

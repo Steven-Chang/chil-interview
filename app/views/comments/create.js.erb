@@ -1,3 +1,6 @@
 <% if @comment.persisted? %>
-<% else %>
+	$('#<%= comments_container_id(@comment.commentable) %>')
+		.append("<%= j render partial: 'shared/comment', object: @comment %>");
+	resetCommentForm("<%= comment_form_id(@comment.commentable) %>");
+	setCommentsCounters("<%= pluralize(@comment.commentable.comments.count, 'Comment') %>");
 <% end %>

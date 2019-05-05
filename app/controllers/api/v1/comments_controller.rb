@@ -11,7 +11,7 @@ class Api::V1::CommentsController < ApplicationController
       options[:include] = [:author]
       render json: CommentSerializer.new(@comment, options), status: :created
     else
-      render json: @comment.errors
+      render json: @comment.errors, status: :unprocessable_entity
     end
 	end
 

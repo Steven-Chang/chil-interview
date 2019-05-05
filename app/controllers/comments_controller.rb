@@ -5,11 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(permitted_params)
     @comment.author = current_user
     authorize @comment, :create?
-
-    respond_to do |format|
-      @comment.save
-      format.js
-    end
+    @comment.save
   end
 
   private

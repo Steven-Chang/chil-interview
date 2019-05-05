@@ -3,7 +3,7 @@
     <span class="post__meta-author"><%= post.author.name %></span>
     <span class="post__meta-published"><%= l(post.created_at.to_date, format: :short) %></span>
     <span class="post__meta-divider"></span>
-    <span class="post__meta-comments"><%= pluralize(post.comments.count, "Comment") %></span>
+    <span class="post__meta-comments comments-counter"><%= pluralize(post.comments.count, "Comment") %></span>
   </div>
   <h2 class="post__title">
     <% if local_assigns[:link_title].presence %>
