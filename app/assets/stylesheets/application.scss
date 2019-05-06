@@ -8,13 +8,16 @@
 @import "variables";
 @import "layout";
 @import "components/comment";
-@import "components/comments";
 @import "components/navbar";
 @import "components/notification";
 @import "components/form";
 @import "components/input";
 @import "components/button";
 @import "components/post";
+
+.border-left {
+	border-left: 1px solid gray;
+}
 
 .d-none {
 	display: none;
@@ -40,10 +43,18 @@
   margin-left: $spacer * .5 !important;
 }
 
+.ml-3 {
+  margin-left: $spacer !important;
+}
+
 .mt-2 {
   margin-top: $spacer * .5 !important;
 }
 
 .mt-3 {
   margin-top: $spacer !important;
+}
+
+.pl-3 {
+	padding-left: $spacer !important;
 }

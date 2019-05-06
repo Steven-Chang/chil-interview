@@ -1,4 +1,4 @@
-<div id="<%= comments_container_id(local_assigns[:commentable]) %>" class="comments">
+<div id="<%= comments_container_id(commentable) %>" class="<%= comments_container_class(commentable) %>">
 	<% if local_assigns[:show_title].presence %>
 		<h4 class="comments-counter"><%= pluralize(comments.count, "Comment") %></h4>
 	<% end %>
