@@ -54,6 +54,23 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 						end
 						expect(page.first(".comments-counter").text.split(" ").first.to_i).to eq(comments_count_before_create)
 					end
+
+					it "resets the comment form" do
+						within("#comment-#{comment.id}") do
+							fill_in "comment[body]", with: "Nugs in 7"
+							click_button "Create Comment"
+							page.all(".reply-text").first.click
+						end
+						expect(page.find("#comment-#{comment.id}-comment-form")).to have_field("comment[body]", with: "")
+					end
+
+					it "hides the comment form" do
+						within("#comment-#{comment.id}") do
+							fill_in "comment[body]", with: "Nugs in 7"
+							click_button "Create Comment"
+						end
+						expect(page).not_to have_selector("#comment-#{comment.id}-comment-form")
+					end
 				end
 			end
 		end
