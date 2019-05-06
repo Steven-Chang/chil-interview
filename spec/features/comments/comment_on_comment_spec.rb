@@ -43,6 +43,18 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 						expect(page).to have_content("Nugs in 7")
 					end
 				end
+
+				context "when user comments on comment" do
+					it "doesn't change the post's comment count" do
+						comments_count_before_create = page.first(".comments-counter").text.split(" ").first.to_i
+						within("#comment-#{comment.id}") do
+							fill_in "comment[body]", with: "Nugs in 7"
+							click_button "Create Comment"
+							expect(page).to have_content("Nugs in 7")
+						end
+						expect(page.first(".comments-counter").text.split(" ").first.to_i).to eq(comments_count_before_create)
+					end
+				end
 			end
 		end
 	end

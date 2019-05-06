@@ -2,5 +2,7 @@
 	$('#<%= comments_container_id(@comment.commentable) %>')
 		.append("<%= j render partial: 'shared/comment', object: @comment %>");
 	commentsService.resetCommentForm("<%= comment_form_id(@comment.commentable) %>");
-	commentsService.setCommentsCounters("<%= pluralize(@comment.commentable.comments.count, 'Comment') %>");
+	<% unless @comment.commentable.class == Comment %>
+		commentsService.setCommentsCounters("<%= pluralize(@comment.commentable.comments.count, 'Comment') %>");
+	<% end %>
 <% end %>
