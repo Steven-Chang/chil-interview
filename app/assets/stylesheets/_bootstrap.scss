@@ -1,0 +1,51 @@
+.border-0 {
+  border: none !important;
+}
+
+.border-left {
+	border-left: 1px solid lightgray !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.d-none {
+	display: none !important;
+}
+
+.mb-1 {
+  margin-bottom: $spacer * .25 !important;
+}
+
+.mb-2 {
+  margin-bottom: $spacer * .5 !important;
+}
+
+.mb-3 {
+  margin-bottom: $spacer !important;
+}
+
+.ml-1 {
+  margin-left: $spacer * .25 !important;
+}
+
+.ml-2 {
+  margin-left: $spacer * .5 !important;
+}
+
+.ml-3 {
+  margin-left: $spacer !important;
+}
+
+.mt-2 {
+  margin-top: $spacer * .5 !important;
+}
+
+.mt-3 {
+  margin-top: $spacer !important;
+}
+
+.pl-3 {
+	padding-left: $spacer !important;
+}
