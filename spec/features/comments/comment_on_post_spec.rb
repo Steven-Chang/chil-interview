@@ -14,7 +14,6 @@ RSpec.describe "comment on post", type: :feature, js: true do
 			context "when user clicks on comment on post input" do
 				it "redirects user to the login page" do
 					find("input[type=text][name='comment[body]']").click
-
 					expect(current_path).to eq(login_path)
 				end
 			end

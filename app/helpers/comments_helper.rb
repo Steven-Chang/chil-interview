@@ -11,6 +11,10 @@ module CommentsHelper
 		"#{commentable.class.to_s.downcase}-#{commentable.id}-comments"
 	end
 
+	def comment_form_classes(commentable)
+		"d-none" if commentable.class == Comment
+	end
+
 	def comment_form_id(commentable)
 		"#{commentable.class.to_s.downcase}-#{commentable.id}-comment-form"
 	end

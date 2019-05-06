@@ -1,4 +1,8 @@
-<%= form_with model: Comment.new(commentable_type: commentable.class.to_s, commentable_id: commentable.id), id: comment_form_id(commentable) do |form| %>
+<%= form_with model: Comment.new(
+                      commentable_type: commentable.class.to_s,
+                      commentable_id: commentable.id),
+              id: comment_form_id(commentable),
+              class: comment_form_classes(commentable) do |form| %>
   <%= form.hidden_field(:commentable_type) %>
   <%= form.hidden_field(:commentable_id) %>
   <div class="form__field mb-3">
@@ -6,7 +10,7 @@
     										class: "form__control",
     										placeholder: "Add a public comment...",
     										required: true,
-    										'login-required': current_user.present? %>
+    										'login-required': current_user.nil? %>
   </div>
   <div class="form__actions mt-2">
     <%= form.submit class: "form__button form__button--primary" %>

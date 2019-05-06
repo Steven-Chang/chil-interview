@@ -3,13 +3,6 @@
 		<h4 class="comments-counter"><%= pluralize(comments.count, "Comment") %></h4>
 	<% end %>
 	
-	<% if commentable.class == Comment %>
-		<div class="ml-3 d-none">
-	<% else %>
-		<div>
-	<% end %>
-		<%= render partial: "shared/comment_form", locals: { commentable: commentable } %>
-	</div>
-
+	<%= render partial: "shared/comment_form", locals: { commentable: commentable } %>
 	<%= render partial: "shared/comment", collection: comments %>
 </div>

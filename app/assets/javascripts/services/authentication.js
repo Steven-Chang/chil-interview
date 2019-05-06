@@ -1,8 +1,13 @@
 var authenticationService = {
-	loginRequired: function() {
+	loginRequired: function(){
 		window.location = "/login";
 	},
-	userNotAuthorized: function() {
+	setLoginRequiredHandlers: function(){
+		$("[login-required='true']").click(function(){
+			authenticationService.loginRequired();
+		});
+	},
+	userNotAuthorized: function(){
 		window.location = "/";
 	}
 }
