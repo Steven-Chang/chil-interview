@@ -30,7 +30,7 @@ RSpec.describe "comment on post", type: :feature, js: true do
 					within("#post-#{post.id}-comment-form") do
 						fill_in "comment[body]", with: "Nugs in 7"
 						expect(page.find_field("comment[body]").value).to eq("Nugs in 7")
-						click_link "Cancel"
+						click_on "Cancel"
 						expect(page.find_field("comment[body]").value).to eq("")
 					end
 				end

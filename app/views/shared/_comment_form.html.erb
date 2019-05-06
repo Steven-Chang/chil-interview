@@ -14,10 +14,10 @@
   </div>
   <div class="form__actions mt-2">
     <%= form.submit class: "form__button form__button--primary" %>
-    <%= link_to t("cancel.text"),
-        root_path,
-        class: "form__button form_button--secondary cancel-link",
-        data: { "commentable-type": commentable.class.to_s.downcase, "commentable-id": commentable.id },
-        onclick: "return false;" %>
+    <%= button_tag t("cancel.text"),
+                   type: "button",
+                   class: "form__button border-0 cancel-link",
+                   data: { "commentable-type": commentable.class.to_s.downcase,
+                           "commentable-id": commentable.id } %>
   </div>
 <% end %>
