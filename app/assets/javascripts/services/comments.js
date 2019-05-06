@@ -24,7 +24,7 @@ var commentsService = {
 			};
 		});
 	},
-	setHandlers:function(){
+	setHandlers: function(){
 		commentsService.setCommentFormCancelHandlers();
 		commentsService.setCommentFormReplyHandlers();
 	}

@@ -2,6 +2,7 @@
 	$('#<%= comments_container_id(@comment.commentable) %>')
 		.append("<%= j render partial: 'shared/comment', object: @comment %>");
 	commentsService.resetCommentForm("<%= comment_form_id(@comment.commentable) %>");
+	commentsService.setHandlers();
 	<% if @comment.commentable.class == Comment %>
 		hideJqueryElement($('#<%= comment_form_id(@comment.commentable) %>'));
 	<% else %>

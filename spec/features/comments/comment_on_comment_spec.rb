@@ -28,7 +28,7 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 				before do
 					within("#comment-#{comment.id}") do
 						expect(page).not_to have_selector("#comment-#{comment.id}-comment-form")
-						page.all(".reply-text").first.click
+						all(".reply-text").first.click
 					end
 				end
 
@@ -55,31 +55,44 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 				end
 
 				context "when user comments on comment" do
-					it "doesn't change the post's comment count" do
-						comments_count_before_create = page.first(".comments-counter").text.split(" ").first.to_i
+					let(:comments_count_before_create) { post_with_comments.comments.count }
+					before do
 						within("#comment-#{comment.id}") do
 							fill_in "comment[body]", with: "Nugs in 7"
 							click_button "Create Comment"
-							expect(page).to have_content("Nugs in 7")
 						end
+					end
+
+					it "adds the newly created comment to page" do
+						expect(page).to have_content("Nugs in 7")
+					end
+
+					it "doesn't change the post's comment count" do
 						expect(page.first(".comments-counter").text.split(" ").first.to_i).to eq(comments_count_before_create)
 					end
 
 					it "resets the comment form" do
 						within("#comment-#{comment.id}") do
-							fill_in "comment[body]", with: "Nugs in 7"
-							click_button "Create Comment"
 							page.all(".reply-text").first.click
 						end
 						expect(page.find("#comment-#{comment.id}-comment-form")).to have_field("comment[body]", with: "")
 					end
 
 					it "hides the comment form" do
-						within("#comment-#{comment.id}") do
-							fill_in "comment[body]", with: "Nugs in 7"
-							click_button "Create Comment"
-						end
 						expect(page).not_to have_selector("#comment-#{comment.id}-comment-form")
+					end
+
+					context "when user clicks on reply for a freshly created comment" do
+						before do
+							sleep 1
+							within("#comment-#{Comment.last.id}") do
+								find(".reply-text").click
+							end
+						end
+
+						it "shows a comment form for that comment" do
+							expect(page).to have_selector("#comment-#{Comment.last.id}-comment-form")
+						end
 					end
 				end
 			end
