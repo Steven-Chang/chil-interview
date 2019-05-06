@@ -7,12 +7,9 @@
     <%= sanitize(comment.body) %>
   </div>
   <div class="comment__footer mt-2">
-  	<%= link_to "Reply",
-                "",
-                'login-required': current_user.nil?,
-                class: 'reply-link',
-                data: { 'comment-id': comment.id },
-                onclick: "return false;" %>
+    <span class="reply-text" 
+      login-required="<%= current_user.nil? %>"
+      data-comment-id="<%= comment.id %>">Reply</span>
   </div>
   
   <%= render partial: "shared/comments",

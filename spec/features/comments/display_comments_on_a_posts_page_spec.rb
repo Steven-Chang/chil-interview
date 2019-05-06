@@ -19,7 +19,6 @@ RSpec.describe "display comments on a posts show page", type: :feature do
 				let(:comment_body) { "Avengers was pretty good." }
 				before do
 					create(:comment, body: comment_body, commentable: post_with_comments.comments.first)
-					puts post_with_comments.comments.first
 					visit post_path(post_with_comments)
 				end
 
