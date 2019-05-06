@@ -8,10 +8,11 @@
   </div>
   <div class="comment__footer mt-2">
   	<%= link_to "Reply",
-                "#",
+                "",
                 'login-required': current_user.nil?,
                 class: 'reply-link',
-                data: { 'comment-id': comment.id } %>
+                data: { 'comment-id': comment.id },
+                onclick: "return false;" %>
   </div>
   
   <%= render partial: "shared/comments",

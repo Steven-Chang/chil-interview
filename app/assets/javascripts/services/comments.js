@@ -5,11 +5,6 @@ var commentsService = {
 			$("#comment-" + commentId + "-comment-form").removeClass("d-none");
 		});
 	},
-	preventReplyLinkDefaultBehaviour: function(){
-		$(".reply-link").click(function(event){
-			event.preventDefault();
-		});
-	},
 	resetCommentForm: function(formId){
 		$("#" + formId + " [name='comment[body]']").val('');
 	},
@@ -19,7 +14,6 @@ var commentsService = {
 		});
 	},
 	setReplyLinkHandlers: function(){
-		commentsService.preventReplyLinkDefaultBehaviour();
 		commentsService.displayCommentFormOnReplyClick();
 	}
 }
