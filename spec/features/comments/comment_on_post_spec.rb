@@ -25,6 +25,22 @@ RSpec.describe "comment on post", type: :feature, js: true do
 				visit post_path(post)
 			end
 
+			context "when user clicks on the post comment cancel button" do
+				it "clears the post comment body input" do
+					within("#post-#{post.id}-comment-form") do
+						fill_in "comment[body]", with: "Nugs in 7"
+						expect(page.find_field("comment[body]").value).to eq("Nugs in 7")
+						click_link "Cancel"
+						expect(page.find_field("comment[body]").value).to eq("")
+					end
+				end
+
+				it "doesn't redirect the user out of the page" do
+					click_button "Create Comment"
+					expect(current_path).to eq(post_path(post))
+				end
+			end
+
 			it "lets user to comment on the post" do
 				expect(current_path).to eq(post_path(post))
 				fill_in "comment[body]", with: "Bucks in 6"
