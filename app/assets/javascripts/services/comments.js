@@ -1,8 +1,8 @@
 var commentsService = {
 	setCommentFormReplyHandlers: function(){
 		$(".reply-text[login-required='false']").click(function(){
-			var commentId = $(this).attr("data-comment-id")
-			$("#comment-" + commentId + "-comment-form").removeClass("d-none");
+			var commentId = $(this).attr("data-comment-id");
+			showJqueryElement($("#comment-" + commentId + "-comment-form"));
 		});
 	},
 	resetCommentForm: function(formId){
@@ -17,7 +17,11 @@ var commentsService = {
 		$("form[action='/comments'] .cancel-link").click(function(){
 			var commentableType =  $(this).attr("data-commentable-type");
 			var commentableId = $(this).attr("data-commentable-id");
-			commentsService.resetCommentForm(commentableType + "-" + commentableId + "-comment-form")
+			var commentFormId = commentableType + "-" + commentableId + "-comment-form";
+			commentsService.resetCommentForm(commentFormId);
+			if(commentableType == "comment"){
+				hideJqueryElement($("#" + commentFormId));
+			};
 		});
 	},
 	setHandlers:function(){

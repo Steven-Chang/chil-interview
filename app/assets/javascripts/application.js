@@ -15,3 +15,11 @@
 //= require tag-it
 //= require rails-ujs
 //= require_tree .
+
+var hideJqueryElement = function(jqueryElement){
+	jqueryElement.addClass("d-none");
+};
+
+var showJqueryElement = function(jqueryElement){
+	jqueryElement.removeClass("d-none");
+};

@@ -44,6 +44,16 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 					end
 				end
 
+				context "when user clicks on cancel for a comments comment form" do
+					it "hides the comment form" do
+						within("#comment-#{comment.id}") do
+							fill_in "comment[body]", with: "Nugs in 7"
+							click_button "Cancel"
+						end
+						expect(page).not_to have_selector("#comment-#{comment.id}-comment-form")
+					end
+				end
+
 				context "when user comments on comment" do
 					it "doesn't change the post's comment count" do
 						comments_count_before_create = page.first(".comments-counter").text.split(" ").first.to_i

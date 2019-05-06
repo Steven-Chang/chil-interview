@@ -3,7 +3,7 @@
 		.append("<%= j render partial: 'shared/comment', object: @comment %>");
 	commentsService.resetCommentForm("<%= comment_form_id(@comment.commentable) %>");
 	<% if @comment.commentable.class == Comment %>
-		$('#<%= comment_form_id(@comment.commentable) %>').addClass("d-none");
+		hideJqueryElement($('#<%= comment_form_id(@comment.commentable) %>'));
 	<% else %>
 		commentsService.setCommentsCounters("<%= pluralize(@comment.commentable.comments.count, 'Comment') %>");
 	<% end %>
