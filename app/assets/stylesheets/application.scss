@@ -20,11 +20,15 @@
 }
 
 .border-left {
-	border-left: 1px solid gray;
+	border-left: 1px solid gray !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 .d-none {
-	display: none;
+	display: none !important;
 }
 
 .mb-1 {

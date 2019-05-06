@@ -13,10 +13,10 @@
     										'login-required': current_user.nil? %>
   </div>
   <div class="form__actions mt-2">
-    <%= form.submit class: "form__button form__button--primary" %>
+    <%= form.submit class: "form__button form__button--primary cursor-pointer" %>
     <%= button_tag t("cancel.text"),
                    type: "button",
-                   class: "form__button border-0 cancel-link",
+                   class: "form__button border-0 cancel-link cursor-pointer",
                    data: { "commentable-type": commentable.class.to_s.downcase,
                            "commentable-id": commentable.id } %>
   </div>
