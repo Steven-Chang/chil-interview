@@ -6,7 +6,7 @@ class Post < ApplicationRecord
 	# === ASSOCIATIONS ===
 	belongs_to :author, class_name: "User"
 	has_many :comments, as: :commentable, dependent: :destroy
-	has_many :orders, dependent: :restrict_with_error
+	has_many :purchases, as: :purchasable, dependent: :restrict_with_error
 
 	# === VALIDATIONS ===
 	validates :title, :body, presence: true

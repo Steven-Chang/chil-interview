@@ -6,10 +6,9 @@ RSpec.describe User, type: :model do
 	let(:user) { build(:user) }
 	describe "ASSOCIATIONS" do
 		it { should have_many(:comments).dependent(:destroy) }
+		it { should have_many(:purchases).dependent(:restrict_with_error) }
 		it { should have_many(:posts).dependent(:destroy) }
-		it { should have_many(:purchase_orders).dependent(:restrict_with_error).inverse_of(:buyer) }
-		it { should have_many(:purchased_posts).through(:purchase_orders) }
-		it { should have_many(:sales_orders).dependent(:restrict_with_error).inverse_of(:seller) }
+		it { should have_many(:purchased_posts).through(:purchases) }
 	end
 
 	describe "VALIDATIONS" do

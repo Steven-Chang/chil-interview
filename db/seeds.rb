@@ -27,6 +27,10 @@ def create_posts_for(user)
   end
 end
 
+puts "Creating subscription options"
+SubscriptionOption.create(description: "monthly", price: 8.99)
+SubscriptionOption.create(description: "yearly", price: 89.99)
+
 puts "== Creating Steven Hays =="
 user1 = User.find_or_initialize_by(username: "steven").tap do |u|
   u.first_name = "Steven"

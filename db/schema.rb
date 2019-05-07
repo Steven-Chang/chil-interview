@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_021850) do
+ActiveRecord::Schema.define(version: 2019_05_07_102214) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -22,24 +22,39 @@ ActiveRecord::Schema.define(version: 2019_05_07_021850) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "buyer_id", null: false
-    t.integer "seller_id", null: false
-    t.integer "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["buyer_id", "seller_id", "post_id"], name: "index_orders_on_buyer_id_and_seller_id_and_post_id", unique: true
-    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
-    t.index ["post_id"], name: "index_orders_on_post_id"
-    t.index ["seller_id"], name: "index_orders_on_seller_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "purchasable_type"
+    t.integer "purchasable_id"
+    t.index ["purchasable_type", "purchasable_id", "user_id"], name: "index_unique_purchase", unique: true
+    t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "subscription_options", force: :cascade do |t|
+    t.string "description", null: false
+    t.decimal "price", precision: 10, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["description"], name: "index_subscription_options_on_description", unique: true
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "subscription_option_id"
+    t.boolean "active", default: true, null: false
+    t.index ["subscription_option_id"], name: "index_subscriptions_on_subscription_option_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -65,6 +80,14 @@ ActiveRecord::Schema.define(version: 2019_05_07_021850) do
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "tranxactions", force: :cascade do |t|
+    t.integer "purchase_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_id"], name: "index_tranxactions_on_purchase_id"
   end
 
   create_table "users", force: :cascade do |t|

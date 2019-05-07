@@ -21,11 +21,13 @@
   <% end %>
   <div class="post__body">
     <% if local_assigns[:expand_body].presence %>
-      <% if current_user %>
+      <% if current_user&.can_view_full_post?(post) %>
         <%= sanitize(post.body) %>
       <% else %>
         <%= sanitize(post.body.truncate(300, omission: "...")) %>
-        <%= link_to "Please login to access full article", login_path %>
+        <% unless current_user %>
+          <%= link_to "Please login to access full article", login_path %>
+        <% end %>
       <% end %>
     <% else %>
       <%= sanitize(post.body.truncate(200, omission: "...")) %>
