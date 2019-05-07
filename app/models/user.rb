@@ -10,6 +10,21 @@ class User < ApplicationRecord
            dependent: :destroy,
            inverse_of: :author
 
+  has_many :purchase_orders,
+           foreign_key: "buyer_id",
+           class_name: "Order",
+           dependent: :restrict_with_error,
+           inverse_of: :buyer
+  has_many :purchased_posts,
+           through: :purchase_orders,
+           class_name: "Post"
+
+  has_many :sales_orders,
+           foreign_key: "seller_id",
+           class_name: "Order",
+           dependent: :restrict_with_error,
+           inverse_of: :seller
+
   # === VALIDATIONS ===
   validates :username, uniqueness: true
 

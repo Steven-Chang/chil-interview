@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_093505) do
+ActiveRecord::Schema.define(version: 2019_05_07_021850) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 2019_05_04_093505) do
     t.string "commentable_type"
     t.integer "commentable_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "buyer_id", null: false
+    t.integer "seller_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id", "seller_id", "post_id"], name: "index_orders_on_buyer_id_and_seller_id_and_post_id", unique: true
+    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
+    t.index ["post_id"], name: "index_orders_on_post_id"
+    t.index ["seller_id"], name: "index_orders_on_seller_id"
   end
 
   create_table "posts", force: :cascade do |t|
