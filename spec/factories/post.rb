@@ -3,7 +3,13 @@
 FactoryBot.define do
   factory :post do
     sequence(:title) { |n| "RSpec Post Title #{n}" }
-    body { "This is an example post" }
+    body do
+      body = ""
+      600.times do |n|
+        body += n.to_s
+      end
+      body
+    end
     author
 
     factory :post_with_comments do

@@ -21,7 +21,12 @@
   <% end %>
   <div class="post__body">
     <% if local_assigns[:expand_body].presence %>
-      <%= sanitize(post.body) %>
+      <% if current_user %>
+        <%= sanitize(post.body) %>
+      <% else %>
+        <%= sanitize(post.body.truncate(300, omission: "...")) %>
+        <%= link_to "Please login to access full article", login_path %>
+      <% end %>
     <% else %>
       <%= sanitize(post.body.truncate(200, omission: "...")) %>
       <%= link_to "Read more...", post, class: "post__continue" %>

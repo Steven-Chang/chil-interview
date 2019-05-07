@@ -48,7 +48,7 @@ RSpec.describe "comment on post", type: :feature, js: true do
 				expect(page).to have_selector(".comment__body", text: "Bucks in 6")
 			end
 
-			it "increases the comment count for post when user creates a post" do
+			it "increases the comment count for post when user creates a comment" do
 				comments_count_before_create = post.comments.count
 				fill_in "comment[body]", with: "Bucks in 6"
 				click_button "Create Comment"

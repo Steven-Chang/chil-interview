@@ -12,7 +12,7 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 				it "redirects user to login page" do
 					visit post_path(post_with_comments)
 					expect(current_path).to eq(post_path(post_with_comments))
-					page.all(".reply-text")[1].click
+					page.all(".reply-text").first.click
 					expect(current_path).to eq(login_path)
 				end
 			end
