@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
 
 	describe "VALIDATIONS" do
 		it { should validate_uniqueness_of(:username) }
+		it { should validate_uniqueness_of(:email).case_insensitive }
 	end
 
 	describe "INSTANCE METHODS" do

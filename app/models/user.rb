@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   # === VALIDATIONS ===
   validates :username, uniqueness: true
+  validates :email, uniqueness: { case_sensitive: false }
 
   # === INSTANCE METHODS ===
   def can_view_full_post?(post)

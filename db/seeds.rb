@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "open-uri"
 
 # This file should contain all the record creation needed to seed the database with its default values.
@@ -28,14 +30,15 @@ def create_posts_for(user)
 end
 
 puts "Creating subscription options"
-SubscriptionOption.create(description: "monthly", price: 8.99)
-SubscriptionOption.create(description: "yearly", price: 89.99)
+SubscriptionOption.create(description: "monthly", price: 8.99, subscribable_type: "Post")
+SubscriptionOption.create(description: "yearly", price: 89.99, subscribable_type: "Site")
 
 puts "== Creating Steven Hays =="
 user1 = User.find_or_initialize_by(username: "steven").tap do |u|
   u.first_name = "Steven"
   u.last_name = "Hays"
   u.password = "Password123"
+  u.username = "stevenhays@fakemail.com"
   u.save
 end
 
@@ -47,6 +50,7 @@ user2 = User.find_or_initialize_by(username: "kim").tap do |u|
   u.first_name = "Kimberly"
   u.last_name = "Green"
   u.password = "Password123"
+  u.username = "kimberlygreen@fakemail.com"
   u.save
 end
 

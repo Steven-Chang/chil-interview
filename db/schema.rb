@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_102214) do
+ActiveRecord::Schema.define(version: 2019_05_08_113322) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_102214) do
     t.datetime "updated_at", null: false
     t.string "purchasable_type"
     t.integer "purchasable_id"
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.index ["purchasable_type", "purchasable_id", "user_id"], name: "index_unique_purchase", unique: true
     t.index ["purchasable_type", "purchasable_id"], name: "index_purchases_on_purchasable_type_and_purchasable_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_102214) do
     t.decimal "price", precision: 10, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subscribable_type"
     t.index ["description"], name: "index_subscription_options_on_description", unique: true
   end
 
@@ -53,7 +55,10 @@ ActiveRecord::Schema.define(version: 2019_05_07_102214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "subscription_option_id"
-    t.boolean "active", default: true, null: false
+    t.boolean "active"
+    t.string "subscribable_type"
+    t.integer "subscribable_id"
+    t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable_type_and_subscribable_id"
     t.index ["subscription_option_id"], name: "index_subscriptions_on_subscription_option_id"
   end
 
@@ -97,6 +102,9 @@ ActiveRecord::Schema.define(version: 2019_05_07_102214) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "password_digest"
+    t.string "stripe_token"
+    t.string "email"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
