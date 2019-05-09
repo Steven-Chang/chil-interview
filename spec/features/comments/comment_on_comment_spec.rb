@@ -59,7 +59,7 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 				context "when user comments on comment" do
 					let(:comments_count_before_create) { post_with_comments.comments.count }
 					before do
-						sleep 2
+						sleep 1
 						within("#comment-#{comment.id}") do
 							fill_in "comment[body]", with: "Nugs in 7"
 							click_button "Create Comment"

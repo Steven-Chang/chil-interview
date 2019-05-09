@@ -37,13 +37,13 @@ SubscriptionOption.create(
 )
 
 SubscriptionOption.create(
-  subscription_type: "Site",
+  subscribable_type: "Site",
   description: "yearly",
   price: 89.99
 )
 
 SubscriptionOption.create(
-  subscription_type: "Site",
+  subscribable_type: "Site",
   description: "yearly",
   price: 89.99
 )

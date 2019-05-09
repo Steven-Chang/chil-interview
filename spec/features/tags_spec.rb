@@ -73,6 +73,7 @@ RSpec.describe "tags", type: :feature, js: true do
 	    click_link "New Post"
 	    fill_in "post[title]", with: "RSpec"
 	    fill_in "post[body]", with: "RSpec"
+	    sleep 1
 			find(".ui-widget-content .ui-autocomplete-input").set(tag_name)
 			click_button "Create Post"
 			expect(page)
@@ -83,8 +84,8 @@ RSpec.describe "tags", type: :feature, js: true do
 	describe "changing tags while editing post" do
 		before do
 	    login_as(post_with_tag.author)
-
 	    visit post_path(post_with_tag)
+	    sleep 2
 	    click_link "Edit"
 		end
 	  it "allows author of post to add tags" do

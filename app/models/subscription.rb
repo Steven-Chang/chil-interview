@@ -13,14 +13,12 @@ class Subscription < ApplicationRecord
 
 	# === INSTANCE METHODS ===
 	def process_new_request(params, current_user)
-    Subscription.transaction do
-      save!
-      amount = subscription_option.price
-      purchase = purchases.build(user: current_user, amount: amount)
-      purchase.save!
-      params[:purchase_id] = purchase.id
-      stripe_response = StripeChargeService.new(params, current_user).call
-      purchase.tranxactions.create!(amount: amount, stripe_charge_id: stripe_response["id"])
-    end
+		amount = subscription_option.price
+		params[:amount] = amount
+		stripe_response = StripeChargeService.new(params, current_user).call
+    save!
+    purchase = purchases.build(user: current_user, amount: amount)
+    purchase.save!
+    purchase.tranxactions.create!(amount: amount, stripe_charge_id: stripe_response["id"])
 	end
 end

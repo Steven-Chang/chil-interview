@@ -66,7 +66,7 @@ RSpec.describe "purchase access on a posts show page", type: :feature, js: true 
 
 				context "when purchase is unsuccessful" do
 					it "displays an error flash message" do
-						subscription_option.update(price: 0)
+						subscription_option.update!(price: 0)
 						visit post_path(post_with_comments)
 	          stripe_iframe = all("iframe").last
 	          Capybara.within_frame stripe_iframe do
@@ -77,7 +77,6 @@ RSpec.describe "purchase access on a posts show page", type: :feature, js: true 
 	            page.find_field("ZIP").set "10001"
 	          end
 	          click_on "Submit Payment"
-	          sleep 10
 						expect(page).to have_selector(".notification__alert")
 					end
 				end

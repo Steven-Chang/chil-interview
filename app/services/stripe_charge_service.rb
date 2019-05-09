@@ -5,7 +5,7 @@ class StripeChargeService
 
   def initialize(params, user)
     @stripe_token = params[:stripeToken]
-    @purchase = Purchase.find(params[:purchase_id])
+    @amount_in_cents = (params[:amount] * 100).to_i
     @user = user
   end
 
@@ -15,12 +15,12 @@ class StripeChargeService
 
   private
 
-  attr_accessor :user, :stripe_token, :purchase
+  attr_accessor :user, :stripe_token, :amount_in_cents
 
   def create_charge
     Stripe::Charge.create(
-      amount: purchase.amount_in_cents,
-      description: "#{user.email} purchase_id: #{purchase.id}",
+      amount: amount_in_cents,
+      description: "#{user.email}",
       currency: DEFAULT_CURRENCY,
       source: stripe_token
     )
