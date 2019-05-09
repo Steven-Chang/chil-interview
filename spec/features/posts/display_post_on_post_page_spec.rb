@@ -45,10 +45,8 @@ RSpec.describe "display post on a posts show page", type: :feature do
 				expect(page).not_to have_link("Please login to access full article")
 			end
 
-			context "when user is the author" do
-				it "shows the post's entire body" do
-					expect(page).to have_text(post_with_comments.body)
-				end
+			it "shows the post's entire body" do
+				expect(page).to have_text(post_with_comments.body)
 			end
 		end
 	end

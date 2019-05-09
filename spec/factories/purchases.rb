@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :purchase do
   	user
-  	association :purchasable, factory: :post
+  	association :purchasable, factory: :subscription
   end
 end

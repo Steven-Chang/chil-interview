@@ -76,6 +76,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.3)
+    connection_pool (2.2.2)
     crass (1.0.4)
     database_cleaner (1.7.0)
     diff-lcs (1.3)
@@ -87,6 +88,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    faraday (0.15.4)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     formatador (0.2.5)
     fuubar (2.3.2)
@@ -136,7 +139,10 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     msgpack (1.2.4)
+    multipart-post (2.1.0)
     nenv (0.3.0)
+    net-http-persistent (3.0.1)
+      connection_pool (~> 2.2)
     nio4r (2.3.1)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
@@ -254,6 +260,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
+    stripe (4.16.0)
+      faraday (~> 0.13)
+      net-http-persistent (~> 3.0)
     tag-it-rails (2.0.0)
       jquery-ui-rails
       railties
@@ -310,6 +319,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
+  stripe
   tag-it-rails
   tzinfo-data
   uglifier (>= 1.3.0)

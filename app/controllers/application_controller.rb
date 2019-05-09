@@ -5,8 +5,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Stripe::InvalidRequestError,
+              Stripe::AuthenticationError,
+              Stripe::APIConnectionError,
+              Stripe::StripeError, with: :catch_stripe_exception
 
   private
+
+  def catch_stripe_exception(exception)
+    redirect_to @subscribable, alert: exception.message
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

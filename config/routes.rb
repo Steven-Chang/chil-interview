@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   resources :comments, only: :create, defaults: { format: :js }
   resources :posts, except: :index
+  resources :subscriptions, only: :create
   resources :tags, param: :name, only: :show
 end

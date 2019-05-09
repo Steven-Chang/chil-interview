@@ -1,0 +1,32 @@
+<div class="p-3" id="post-purchase-form-container">
+  <h3>THERE'S MORE TO THIS STORY</h3>
+  <h5>BUT IT'S A MEMBER-ONLY STORY. SUBSCRIBE TODAY TO UNLOCK IT AND MORE...</h5>
+  <%= form_with model: Subscription.new, id: "payment-form", local: true do |f| %>
+    <%= f.hidden_field :subscribable_type, value: subscribable.class.to_s %>
+    <%= f.hidden_field :subscribable_id, value: subscribable.id %>
+    <div>
+      <b><%= label :subscription_option_id, "Subscription Options" %></b>
+      <% subscribable.subscription_options.each_with_index do |subscription_option, index| %>
+        <div class="subscription-option mb-3">
+          <%= f.radio_button :subscription_option_id, subscription_option.id, checked: index.zero? %> <%= "#{number_to_currency(subscription_option.price) } - #{subscription_option.subscribable_type} #{subscription_option.description} subscription" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="mt-3">
+      <label for="card-element">
+        Credit or debit card
+      </label>
+      <div id="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+      </div>
+
+      <!-- Used to display Element errors. -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+  
+      <div class="form__actions">
+         <button class="form__button">Submit Payment</button>
+      </div>
+  <% end %>
+</div>

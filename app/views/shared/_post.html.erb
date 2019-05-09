@@ -5,6 +5,7 @@
     <span class="post__meta-divider"></span>
     <span class="post__meta-comments comments-counter"><%= pluralize(post.comments.count, "Comment") %></span>
   </div>
+
   <h2 class="post__title">
     <% if local_assigns[:link_title].presence %>
       <%= link_to(post.title, post) %>
@@ -12,6 +13,7 @@
       <%= post.title %>
     <% end %>
   </h2>
+
   <% unless post.tag_list.empty? %>
     <div class="post__tags">
       <% post.tag_list.each_with_index do |tag_name, index| %>
@@ -19,13 +21,17 @@
       <% end %>
     </div>
   <% end %>
+
   <div class="post__body">
     <% if local_assigns[:expand_body].presence %>
       <% if current_user&.can_view_full_post?(post) %>
         <%= sanitize(post.body) %>
       <% else %>
         <%= sanitize(post.body.truncate(300, omission: "...")) %>
-        <% unless current_user %>
+        <% if current_user %>
+          <%= render partial: "shared/subscription_payment_form",
+              locals: { subscribable: post } %>
+        <% else %>
           <%= link_to "Please login to access full article", login_path %>
         <% end %>
       <% end %>

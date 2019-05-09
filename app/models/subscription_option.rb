@@ -10,6 +10,13 @@ class SubscriptionOption < ApplicationRecord
 	end
 
 	# === VALIDATIONS ===
-	validates :description, uniqueness: { case_sensitive: false }
+	validates :description, presence: true
+	validates :subscribable_type, presence: true
 	validates :price, numericality: true
+	validates :subscribable_type, uniqueness: { scope: [:description] }
+
+	# === CLASS METHODS ===
+	def self.subscription_options_for_class(class_name)
+		where("subscribable_type = 'Site'").or(where("subscribable_type = ?", class_name))
+	end
 end

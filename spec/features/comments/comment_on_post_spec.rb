@@ -58,6 +58,7 @@ RSpec.describe "comment on post", type: :feature, js: true do
 			it "resets the comment form when user creates a post" do
 				fill_in "comment[body]", with: "Bucks in 6"
 				click_button "Create Comment"
+				sleep 2
 				expect(page).to have_field("comment[body]", with: "")
 			end
 		end

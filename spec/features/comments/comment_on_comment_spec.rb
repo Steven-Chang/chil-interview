@@ -26,10 +26,12 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 
 			context "when user clicks on reply for a comment" do
 				before do
+					sleep 1
 					within("#comment-#{comment.id}") do
 						expect(page).not_to have_selector("#comment-#{comment.id}-comment-form")
 						all(".reply-text").first.click
 					end
+					sleep 1
 				end
 
 				it "displays the comment form for that comment" do
@@ -57,10 +59,12 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 				context "when user comments on comment" do
 					let(:comments_count_before_create) { post_with_comments.comments.count }
 					before do
+						sleep 2
 						within("#comment-#{comment.id}") do
 							fill_in "comment[body]", with: "Nugs in 7"
 							click_button "Create Comment"
 						end
+						sleep 2
 					end
 
 					it "adds the newly created comment to page" do
@@ -72,6 +76,7 @@ RSpec.describe "comment on comment", type: :feature, js: true do
 					end
 
 					it "resets the comment form" do
+						sleep 1
 						within("#comment-#{comment.id}") do
 							page.all(".reply-text").first.click
 						end

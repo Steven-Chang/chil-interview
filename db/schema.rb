@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_113322) do
+ActiveRecord::Schema.define(version: 2019_05_08_150555) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -92,7 +92,9 @@ ActiveRecord::Schema.define(version: 2019_05_08_113322) do
     t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_charge_id"
     t.index ["purchase_id"], name: "index_tranxactions_on_purchase_id"
+    t.index ["stripe_charge_id"], name: "index_tranxactions_on_stripe_charge_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
