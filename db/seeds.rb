@@ -10,22 +10,12 @@ require "open-uri"
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def fetch_lorem_ipsum(paragraphs = 10)
-  doc = Nokogiri::HTML(open("https://loripsum.net/api/#{paragraphs}/headers"))
-
-  title = doc.at_css("h1").remove.content
-  body = doc.at_css("body").inner_html
-
-  return title, body
-end
-
 def create_posts_for(user)
   return if user.posts.present?
 
   rand(1..5).times do |num|
     puts "."
-    title, body = fetch_lorem_ipsum
-    user.posts.create(title: title, body: body)
+    user.posts.create(title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph(sentence_count: 77))
   end
 end
 
